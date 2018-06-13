@@ -48,7 +48,7 @@ mkmetadata will scan all folders under ```path_to_directory_containing_all_proje
 4. Additionally, you can provide a configuration file containing your information so mkmetadata can autofill "Submitter Details" sheet. A template config file can be found at src/user_info.config. [See here](https://github.com/SichongP/EVA_Instrumentality/blob/master/config_guidline.md) for more information.
 To include a user information file, use ```--user user_info.config```
 
-5. Complete the rest of metadata file. (See FAQ for help)
+5. Complete the rest of metadata file. (See [FAQ](https://github.com/SichongP/EVA_Instrumentality/blob/master/FAQ.md) for help)
 
 [**See here for a sample workflow**](https://github.com/SichongP/EVA_Instrumentality/blob/master/sample_workflow.md)
 
@@ -56,7 +56,7 @@ To include a user information file, use ```--user user_info.config```
 
 The program relies on your file structure to determine the relationships between your projects, analyses, and files. Thus, it is crucial that you organize your files correctly for the program to generate correct metadata file.
 
-*Alternatively, you can refer to FAQ to make your own metadata file if you do not wish to re-organize your files*
+*Alternatively, you can refer to [FAQ](https://github.com/SichongP/EVA_Instrumentality/blob/master/FAQ.md) to make your own metadata file if you do not wish to re-organize your files*
 
 You should have a folder for each project. 
 
