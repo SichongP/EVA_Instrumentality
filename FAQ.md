@@ -34,15 +34,15 @@ The sequencing platforms used to generate sequencing data like Illumina MiSeq, o
 EVA requires that all vcf files follow [4.X vcf format specifications](http://samtools.github.io/hts-specs/VCFv4.3.pdf) strictly.  
 If you have only a few variants to submit, an easy approach would be to mannually edit the [template vcf file](https://www.ebi.ac.uk/eva/files/template.vcf) provided by EVA. Once you download this template file, you can open it with any text editor (MS excel is recomended on Windows machines since Windows notepad uses different line breaks than unix machines, which is not supported in vcf format specifications. This might change in a recent future! [Learn more about this here](https://blogs.msdn.microsoft.com/commandline/2018/05/08/extended-eol-in-notepad/))  
 The following section will provide a brief instruction on how to add your variants to the template vcf file provided by EVA.  
-**On a Windows machine:**
+**On a Windows machine:**  
 Open the template with MS excel. You should see two rows:  
    ```
    ##fileformat=VCFv4.3
    #CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO
    ```
 On the second row, each attribute should occupy a cell. Starting from the third row, input your data, one variant per row, with each attribute in corresponding column.
-After all data is input, save and rename the file. Then run [vcf validator](https://github.com/EBIvariation/vcf-validator/releases) to make sure it passes EVA's requirements.
-**On a Unix machine:**
+After all data is input, save and rename the file. Then run [vcf validator](https://github.com/EBIvariation/vcf-validator/releases) to make sure it passes EVA's requirements.  
+**On a Unix machine:**  
 for macOS with MS excel or Linux with similar spreadsheet app, steps from above still apply.  
 Alternatively, you can use a text editor to open the template.vcf file. You should see two rows:
 ```
@@ -54,7 +54,7 @@ To double check that all fields in your vcf file are tab-delimited, on terminal 
 ```
 cat -A yourvariatns.vcf | less
 ```
-and you should see something similar as following:
+and you should see something similar as following (each ^I indicates a tab character):
 ```
 ##fileformat=VCFv4.3^I^I^I^I^I^I^I^M$
 #CHROM^IPOS^IID^IREF^IALT^IQUAL^IFILTER^IINFO^M$
@@ -63,8 +63,13 @@ and you should see something similar as following:
 ```
 After all data is input, save and rename the file. Then run [vcf validator](https://github.com/EBIvariation/vcf-validator/releases) to make sure it passes EVA's requirements.  
 For large amount of variants generated directly by variant callers, they should pass validation with no issues as long as you're using the lastest version of variant callers. If errors occur, contact *eva-helpdesk@ebi.ac.uk* to identify issues and devlopers for help.  
-If you modify your vcf files, issues may arise. Some common errors are:  
+If you modify your vcf files, errors may arise. Some common errors are:  
   a. Tabs are replaced by spaces in newly generated vcf file.  
   This error can be confirmed by ```cat -A yourvariants.vcf | less``` as tabs will show up as ```^I``` while spaces will be displayed as spaces.
   There could be many potential reasons as to why this would happen. A most common reason is the ```echo``` command on a unix machine. If you're running a script to edit your vcf file and using ```echo``` to output lines, make sure variables are double quaoted or better yet, use ```printf``` instead of ```echo```   
-  
+  b. Info field value is not a comma-separated list of valid strings.  
+  This error can also be confirmed by ```cat -A yourvariants.vcf | less```, there should not be any spaces in the value of Info field. (see [vcf specifications](https://samtools.github.io/hts-specs/VCFv4.2.pdf) for details on vcf format standards)  
+  c. Error: Info key is not a sequence of alphanumeric and/or punctuation characters.  
+  Same as above. Info key should only contain alphanumeric characters separated by commas. This is likely due to text editor used to edit vcf files. Vim is known to cause this problem. Nano on Unix and Notepad++ or MS excel on Windows are recommended for editing vcf files. In general, however, you should avoid mannually edit vcf files unless absolutely necessary.  
+  d. Reference and alternate alleles do not share the first nucleotide.  
+  This likely refers to deletions. Per vcf specifications, Ref string of a deletion must include at least one base before deletion and    so Alt string must share at least the first nucleotide with Ref string. It is not clear how this error arose (possibly due to the program used to generate vcf files). Please contact *eva-helpdesk@ebi.ac.uk* for help on how to correct this error.
