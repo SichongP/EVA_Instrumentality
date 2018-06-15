@@ -78,10 +78,10 @@ class analysis:
 		self.refmd5 = None
 		self.prj = proj
 		self.files = []
-                self.anly_info_loaded = False
-                for dir in os.listdir(path):
-                        if dir == "analysis_info.config":
-                        #project_info.config file detected, read info from file
+		self.anly_info_loaded = False
+		for dir in os.listdir(path):
+			if dir == "analysis_info.config":
+			#project_info.config file detected, read info from file
 				self.read_analysis_info(os.path.join(path,dir))
 				self.anly_info_loaded = True
 			elif os.path.isfile(os.path.join(path,dir)):
