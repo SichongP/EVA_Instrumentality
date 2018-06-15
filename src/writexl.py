@@ -1,6 +1,6 @@
 #!/bin/usr/python2
 import openpyxl
-import project
+from .project import *
 
 def write_proj_tab(proj, tab, proj_count):
 	tab.cell(row=proj_count+1, column=1, value=proj.title)
