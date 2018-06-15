@@ -7,7 +7,7 @@ def open_file(filename):
 		fp = open(filename)
 	except IOError as e:
 		if e.errno == errno.ENOENT:
-			print "Error: Cannot find file {} at src/".format(filename)
+			print("Error: Cannot find file {} at src/".format(filename))
 			return None
 		raise
 	else:
