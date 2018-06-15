@@ -3,7 +3,7 @@
 #This module defines project, analysis, and file calsses
 import os
 import os.path
-from user import open_file, read_info
+from .user import open_file, read_info
 from pprint import pprint
 import hashlib
 import re
