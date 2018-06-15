@@ -66,8 +66,8 @@ class analysis:
 		print("Experiment Type: {}".format(self.experiment))
 		print("Reference: {}".format(self.ref))
 		print("Associated files:\n\t\t")
-                for item in self.files:
-                        item.print_file_info()
+		for item in self.files:
+			item.print_file_info()
 	def __init__(self, proj, analysis_count, path):
 	#a path to the analysis directory is expected
 		self.title = None
