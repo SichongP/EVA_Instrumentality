@@ -104,7 +104,7 @@ class analysis:
 class project:
 	def read_proj_info(self, path):
 		prj_infos = read_info(path)
-        	if prj_infos:
+		if prj_infos:
 			self.title = prj_infos['TITLE']
 			self.alias = prj_infos['ALIAS']
 			self.description = prj_infos['DESCRIPTION']
