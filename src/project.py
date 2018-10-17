@@ -50,15 +50,24 @@ class file:
 		self.md5 = self.get_md5(path)
 	
 class analysis:
+	MAN_ATT = ('TITLE', 'ALIAS', 'DESCRIPTION', 'EXPERIMENT_TYPE', 'REFERENCE', 'REFMD5')
+	OPT_ATT = ('PLATFORM', 'SOFTWARE', 'PIPELINE', 'IMPUTATION', 'PHASING', 'CENTER', 'DATE', 'LINK', 'RUN')
 	def read_analysis_info(self, path):
 		anl_infos = read_info(path)
 		if anl_infos:
+			for key in self.MAN_ATT:
+				if key not in anl_infos:
+					print("Warning: Required attribute: {} not found in info file. Please input it manually!".format(key))
+					anl_infos[key] = None
 			self.title = anl_infos['TITLE']
 			self.description = anl_infos['DESCRIPTION']
 			self.alias = anl_infos['ALIAS']
 			self.experiment = anl_infos['EXPERIMENT_TYPE']
 			self.ref = anl_infos['REFERENCE']
 			self.refmd5 = anl_infos['REFMD5']
+			for key in self.OPT_ATT:
+				if key in anl_infos:
+					self.opt_att[key] = anl_infos[key]
 	def print_analy_info(self):
 		print("Analysis title: {}".format(self.title))
 		print("Analysis alias: {}".format(self.alias))
@@ -77,6 +86,7 @@ class analysis:
 		self.ref = None
 		self.refmd5 = None
 		self.prj = proj
+		self.opt_att = dict()
 		self.files = []
 		self.anly_info_loaded = False
 		for dir in os.listdir(path):
@@ -102,20 +112,32 @@ class analysis:
 			else:
 				self.alias = proj.title + "_" + str(analysis_count)
 class project:
+	MAN_ATT = ('TITLE', 'ALIAS', 'DESCRIPTION', 'CENTER', 'TAXID')
+	OPT_ATT = ('PUBLICATION', 'PARENT', 'CHILD', 'PEER', 'LINK', 'HOLD_DATE', 'COLLABORATORS', 'STRAIN', 'BREED', 'BROKER')
 	def read_proj_info(self, path):
 		prj_infos = read_info(path)
 		if prj_infos:
+			for key in self.MAN_ATT:
+				if key not in prj_infos:
+					print("Warning: required attribute {} not found in info file. Please input it manually!".format(key))
+					prj_infos[key] = None
 			self.title = prj_infos['TITLE']
 			self.alias = prj_infos['ALIAS']
 			self.description = prj_infos['DESCRIPTION']
 			self.center = prj_infos['CENTER']
 			self.taxid = prj_infos['TAXID']
+		for key in self.OPT_ATT:
+			if key in prj_infos:
+				self.opt_att[key] = prj_infos[key]
 	def print_proj_info(self):
 		print("Project title: {}".format(self.title))
 		print("Project alias: {}".format(self.alias))
 		print("Project description: {}".format(self.description))
 		print("Project center: {}".format(self.center))
 		print("Project taxid: {}".format(self.taxid))
+		if self.opt_att:
+			for key in self.opt_att:
+				print("{} : {}".format(key, self.opt_att[key]))
 		print("Project analyses:\n\t\t")
 		for item in self.analyses:
 			item.print_analy_info()
@@ -128,6 +150,7 @@ class project:
 		self.taxid = None
 		#for each analysis folder, initiate an anlysis instance
 		self.analyses = []
+		self.opt_att = dict()
 		self.proj_info_loaded = False
 		self.analysis_count = 0 #record the how many analyses are encountered in case users don't provide analysis alias
 		for dir in os.listdir(path):
