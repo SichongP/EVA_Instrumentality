@@ -51,7 +51,7 @@ class file:
 	
 class analysis:
 	MAN_ATT = ('TITLE', 'ALIAS', 'DESCRIPTION', 'EXPERIMENT_TYPE', 'REFERENCE', 'REFMD5')
-	OPT_ATT = ('PLATFORM', 'SOFTWARE', 'PIPELINE', 'IMPUTATION', 'PHASING', 'CENTER', 'DATE', 'LINK', 'RUN')
+	OPT_ATT = ('PLATFORM', 'SOFTWARE', 'PIPELINE', 'IMPUTATION', 'PHASING', 'CENTER', 'DATE', 'ANAL_LINK', 'RUN')
 	def read_analysis_info(self, path):
 		anl_infos = read_info(path)
 		if anl_infos:
@@ -113,7 +113,7 @@ class analysis:
 				self.alias = proj.title + "_" + str(analysis_count)
 class project:
 	MAN_ATT = ('TITLE', 'ALIAS', 'DESCRIPTION', 'CENTER', 'TAXID')
-	OPT_ATT = ('PUBLICATION', 'PARENT', 'CHILD', 'PEER', 'LINK', 'HOLD_DATE', 'COLLABORATORS', 'STRAIN', 'BREED', 'BROKER')
+	OPT_ATT = ('PUBLICATION', 'PARENT', 'CHILD', 'PEER', 'PRJ_LINK', 'HOLD_DATE', 'COLLABORATORS', 'STRAIN', 'BREED', 'BROKER')
 	def read_proj_info(self, path):
 		prj_infos = read_info(path)
 		if prj_infos:
