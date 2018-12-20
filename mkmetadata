@@ -27,7 +27,13 @@ if a.user:
 	read_user = True
 #	pprint(user_infos)
 projects = []
-for dir in os.listdir(a.path):
+#Look for ignore list
+if os.path.exists(os.path.join(a.path,".ignore")):
+	with open(os.path.join(a.path,".ignore")) as f:
+		ignore_list = f.read().splitlines()
+else:
+	ignore_list=[]
+for dir in next(os.walk(a.path))[1]:
 #	print(dir)
-	projects.append(project.project(os.path.join(a.path,dir)))
+	projects.append(project.project(os.path.join(a.path,dir),ignore_list))
 writexl.write(read_user, user_infos, projects, a.out)

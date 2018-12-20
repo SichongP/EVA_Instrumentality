@@ -77,7 +77,7 @@ class analysis:
 		print("Associated files:\n\t\t")
 		for item in self.files:
 			item.print_file_info()
-	def __init__(self, proj, analysis_count, path):
+	def __init__(self, proj, analysis_count, path,ignore_list):
 	#a path to the analysis directory is expected
 		self.title = None
 		self.alias = None
@@ -95,6 +95,8 @@ class analysis:
 				self.read_analysis_info(os.path.join(path,dir))
 				self.anly_info_loaded = True
 			elif os.path.isfile(os.path.join(path,dir)):
+				if dir.lower().endswith(tuple(ignore_list)):
+					continue
 				self.files.append(file(self, os.path.join(path,dir)))
 			else:
 				print("Unrecognized file {}, ignoring...".format(dir))
@@ -141,7 +143,7 @@ class project:
 		print("Project analyses:\n\t\t")
 		for item in self.analyses:
 			item.print_analy_info()
-	def __init__(self, path):
+	def __init__(self, path, ignore_list):
 	#a path to the project directory is expected
 		self.title = None
 		self.alias = None
@@ -170,7 +172,7 @@ class project:
 				continue
 			if os.path.isdir(os.path.join(path,dir)):
 				self.analysis_count += 1
-				self.analyses.append(analysis(self, self.analysis_count, os.path.join(path,dir)))
+				self.analyses.append(analysis(self, self.analysis_count, os.path.join(path,dir),ignore_list))
 			else:
 				print("Unrecognized file {}, ignoring...".format(dir))
 def main():
