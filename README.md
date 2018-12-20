@@ -48,7 +48,7 @@ mkmetadata will scan all folders under ```path_to_directory_containing_all_proje
 4. Additionally, you can provide a configuration file containing your information so mkmetadata can autofill "Submitter Details" sheet. A template config file can be found at src/user_info.config. [See here](https://github.com/SichongP/EVA_Instrumentality/blob/master/config_guidline.md) for more information.
 To include a user information file, use ```--user user_info.config```
 
-5. You can also add a file named ".ignore" to the directory you provid. If .ignore file exists, any files found in your project/analysis folder with an extension that matches the ones on the .ignore list will be ignored.
+5. You can also add a file named ".ignore" to the directory you provid. If .ignore file exists, any files found in your project/analysis folder that ends with a keyword on the .ignore list will be ignored.
 
 6. Complete the rest of metadata file. (See [FAQ](https://github.com/SichongP/EVA_Instrumentality/blob/master/FAQ.md) for help)
 
