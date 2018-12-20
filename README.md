@@ -10,7 +10,7 @@ Please open an issue in this repository. When reporting an issue, please provide
 
 ## What you will need:
 * All your variant files (vcf, gff, bed, etc.) organized as instructed below
-* *python2*
+* *python*
 * python module *openpyxl*
   * To install openpyxl, run the following code:
      ```shell
@@ -18,7 +18,7 @@ Please open an issue in this repository. When reporting an issue, please provide
      ```
   * You can check if you have *openpyxl* available by doing the following:
     ```python
-    python2
+    python
     >>> from openpyxl import Workbook
     ```
   * Once you have *openpyxl* installed, this should run without errors issued.
@@ -48,7 +48,9 @@ mkmetadata will scan all folders under ```path_to_directory_containing_all_proje
 4. Additionally, you can provide a configuration file containing your information so mkmetadata can autofill "Submitter Details" sheet. A template config file can be found at src/user_info.config. [See here](https://github.com/SichongP/EVA_Instrumentality/blob/master/config_guidline.md) for more information.
 To include a user information file, use ```--user user_info.config```
 
-5. Complete the rest of metadata file. (See [FAQ](https://github.com/SichongP/EVA_Instrumentality/blob/master/FAQ.md) for help)
+5. You can also add a file named ".ignore" to the directory you provid. If .ignore file exists, any files found in your project/analysis folder with an extension that matches the ones on the .ignore list will be ignored.
+
+6. Complete the rest of metadata file. (See [FAQ](https://github.com/SichongP/EVA_Instrumentality/blob/master/FAQ.md) for help)
 
 [**See here for a sample workflow**](https://github.com/SichongP/EVA_Instrumentality/blob/master/sample_workflow.md)
 
@@ -69,6 +71,7 @@ info.config file should be put directly under the project/analysis folder they b
 See below structure (trailing slash ```/``` indicates a directory instead of a file)
 
 * Projects/
+  .ignore
   * project1/
     * project_info.config (optional)
     * analysis1/
