@@ -71,7 +71,7 @@ info.config file should be put directly under the project/analysis folder they b
 See below structure (trailing slash ```/``` indicates a directory instead of a file)
 
 * Projects/\
-    .ignore
+    .ignore (optional)
   * project1/
     * project_info.config (optional)
     * analysis1/
