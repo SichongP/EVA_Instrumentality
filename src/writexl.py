@@ -1,6 +1,9 @@
 #!/bin/usr/python2
 import openpyxl
+from inspect import getsourcefile
 from .project import *
+import os.path
+
 
 def write_opt_att(row_num, key, dict, tab):
 	if key == 'PUBLICATION':
@@ -71,7 +74,8 @@ def write_file_tab(file, tab, file_count):
 	tab.cell(row=file_count+1, column=4, value=file.md5)
 
 def write(read_user, user_infos, projects, out):
-	wb = openpyxl.load_workbook(filename='src/EVA_Submission_template.V1.1.0.xlsx')
+	dir = os.path.dirname(os.path.abspath(getsourcefile(lambda:0)))
+	wb = openpyxl.load_workbook(filename=os.path.join(dir,'EVA_Submission_template.V1.1.0.xlsx'))
 	if read_user:
 		ws = wb['Submitter Details']
 		ws['A2'] = user_infos['LAST_NAME']
